@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'my_service_screen.dart'; // Import the hall details
+import 'package:firebase_database/firebase_database.dart';
+import '../models/hall.dart'; // Import the existing Hall model
 
 class UpdateServiceScreen extends StatefulWidget {
   final Hall hall;
@@ -13,10 +14,13 @@ class UpdateServiceScreen extends StatefulWidget {
 class _UpdateServiceScreenState extends State<UpdateServiceScreen> {
   late TextEditingController _nameController;
   late TextEditingController _descriptionController;
-  late TextEditingController _addressController;
+  late TextEditingController _locationController;
   late TextEditingController _phoneController;
   late TextEditingController _capacityController;
   late TextEditingController _priceController;
+
+  final DatabaseReference servicesRef =
+      FirebaseDatabase.instance.ref().child('services');
 
   @override
   void initState() {
@@ -24,10 +28,10 @@ class _UpdateServiceScreenState extends State<UpdateServiceScreen> {
     _nameController = TextEditingController(text: widget.hall.name);
     _descriptionController =
         TextEditingController(text: widget.hall.description);
-    _addressController = TextEditingController(text: widget.hall.address);
+    _locationController = TextEditingController(text: widget.hall.location);
     _phoneController = TextEditingController(text: widget.hall.phoneNumber);
-    _capacityController = TextEditingController(text: '500');
-    _priceController = TextEditingController(text: '3000');
+    _capacityController = TextEditingController(text: widget.hall.capacity);
+    _priceController = TextEditingController(text: widget.hall.price);
   }
 
   @override
@@ -58,9 +62,9 @@ class _UpdateServiceScreenState extends State<UpdateServiceScreen> {
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: _addressController,
+              controller: _locationController,
               decoration: const InputDecoration(
-                labelText: 'Address',
+                labelText: 'Location',
                 border: OutlineInputBorder(),
               ),
             ),
@@ -92,17 +96,36 @@ class _UpdateServiceScreenState extends State<UpdateServiceScreen> {
             ),
             const SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: () {
-                // Handle the update logic here
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Details updated successfully!')),
-                );
-              },
+              onPressed: _updateService,
               child: const Text('Update'),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _updateService() {
+    final updatedHall = Hall(
+      key: widget.hall.key,
+      name: _nameController.text,
+      description: _descriptionController.text,
+      location: _locationController.text,
+      phoneNumber: _phoneController.text,
+      imageUrl: widget.hall.imageUrl, // Assuming imageUrl remains unchanged
+      capacity: _capacityController.text,
+      price: _priceController.text,
+    );
+
+    servicesRef.child(widget.hall.key).update(updatedHall.toMap()).then((_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Details updated successfully!')),
+      );
+      Navigator.pop(context);
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update details: $error')),
+      );
+    });
   }
 }

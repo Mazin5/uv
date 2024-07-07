@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:uv/screens/my_service_screen.dart';
 import 'package:uv/screens/reservations_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Auth Demo',
+      title: 'VendorApp',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -35,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    ReservationsScreen(), // Update to include Reservations screen
-    MyServiceScreen(), // Update to include My Service screen
+    ReservationsScreen(),
+    MyServiceScreen(),
     const Text('Profile Page'),
   ];
 
