@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "353034621796",
+    "project_id": "uvaapp-f3631",
+    "storage_bucket": "uvaapp-f3631.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353034621796:android:71f4e3b986970b1f8fe071",
+        "android_client_info": {
+          "package_name": "com.example.uv"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353034621796-m954p3q4ehqed6uqiiqukvgibrejfdua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJH1DJw9ocLY8IPKlfsz18OA1dXVYZUsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353034621796-m954p3q4ehqed6uqiiqukvgibrejfdua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353034621796:android:59771b3388dbc4b38fe071",
+        "android_client_info": {
+          "package_name": "com.example.uva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "353034621796-m954p3q4ehqed6uqiiqukvgibrejfdua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJH1DJw9ocLY8IPKlfsz18OA1dXVYZUsc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "353034621796-m954p3q4ehqed6uqiiqukvgibrejfdua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
